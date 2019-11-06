@@ -2,10 +2,15 @@ $ratio: 375 / 10;
 
 @function px2rem($px) {
   @return $px / $ratis + rem
-}
+};
 
 @mixin center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin fullpage {
+  width: 100%;
+  height: 100%;
 }
