@@ -68,7 +68,6 @@ export default {
   font-size: 20px;
   padding: 0 20px 0 25px;
   border-radius: 25px;
-  /* @include center; */
   display: flex;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.25);

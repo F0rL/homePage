@@ -1,8 +1,8 @@
 $ratio: 375 / 10;
 
 @function px2rem($px) {
-  @return $px / $ratis + rem
-};
+  @return $px / $ratis + rem;
+}
 
 @mixin center {
   display: flex;
@@ -13,4 +13,18 @@ $ratio: 375 / 10;
 @mixin fullpage {
   width: 100%;
   height: 100%;
+}
+
+@mixin columnStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

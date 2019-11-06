@@ -2,9 +2,12 @@ import { mapGetters, mapActions } from 'vuex'
 
 export const homeMixin = {
   computed: {
-    ...mapGetters(['inputFocus'])
+    ...mapGetters(['inputFocus', 'showWeather'])
   },
   methods: {
-    ...mapActions(['setInputFocus'])
+    ...mapActions(['setInputFocus', 'setShowWeather']),
+    hideWeather() {
+      this.setShowWeather(false)
+    }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="x-time-container">
-    <p>{{week}}</p>
+    <p>{{wellCome}}</p>
     <div class="x-time">
       <span>{{hour}}</span>
       <span>:</span>
@@ -16,7 +16,7 @@ export default {
     return {
       minute: null,
       hour: null,
-      week: null
+      wellCome: null
     }
   },
   mounted() {
@@ -27,16 +27,13 @@ export default {
       let moment = new Date()
       this.minute = this.formateTime(moment.getMinutes())
       this.hour = this.formateTime(moment.getHours())
-      const weekArray = [
-        '星期日',
-        '星期一',
-        '星期二',
-        '星期三',
-        '星期四',
-        '星期五',
-        '星期六'
-      ]
-      this.week = weekArray[moment.getDay()]
+      if (this.hour >= 6 && this.hour < 12) {
+        this.wellCome = '早上好'
+      } else if (this.hour >= 12 && this.hour < 6) {
+        this.wellCome = '下午好'
+      } else {
+        this.wellCome = '晚上好'
+      }
     },
     updateTime() {
       this.timerId = setInterval(this.getTime(), 1000)
@@ -60,8 +57,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  p {
+    font-size: 40px;
+  }
   .x-time {
-    margin-left: 40px;
+    margin-left: 20px;
   }
 }
 </style>

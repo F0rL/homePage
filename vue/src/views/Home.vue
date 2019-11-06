@@ -3,15 +3,15 @@
     <div class="home-bg" ref="homeRef" :class="{'input-active': inputFocus}"></div>
     <div class="home-cover" :class="{'input-active': inputFocus}"></div>
     <div class="home-content-wrapper">
-      <div class="home-menu-wrapper"></div>
-      <div class="home-main-wrapper">
-        <home-wether :wetherInfo="wetherInfo" />
+      <div class="home-menu-wrapper" @click="hideWeather"></div>
+      <div class="home-main-wrapper" @click="hideWeather">
         <div class="home-center-wrapper">
           <x-time class="home-time" />
           <home-input v-model="searchValue" placeholder="请输入搜索内容" @inputSearch="inputSearch" />
         </div>
       </div>
     </div>
+    <home-weather :info="weatherInfo" class="home-weather" v-if="weatherInfo"/>
   </div>
 </template>
 
@@ -19,7 +19,8 @@
 import { homeMixin } from '../store/mixin'
 import HomeInput from '../components/home/HomeInput'
 import xTime from '../components/common/xTime'
-import HomeWether from '../components/home/HomeWether'
+import HomeWeather from '../components/home/HomeWeather'
+
 export default {
   name: 'Home',
   mixins: [homeMixin],
@@ -27,14 +28,11 @@ export default {
     return {
       bgMsg: null,
       searchValue: null,
-      wetherInfo: null
+      weatherInfo: null
     }
   },
   mounted() {
-    this.$http.get('/home/bg').then(res => {
-      this.bgMsg = res.data.imgUrl
-      this.setBgImg()
-    })
+    this.getBgImg()
     this.getWether()
   },
   methods: {
@@ -42,19 +40,26 @@ export default {
       console.log('搜索', this.searchValue)
       this.searchValue = ''
     },
+    getBgImg() {
+      this.$http.get('/home/bg').then(res => {
+        this.bgMsg = res.data.imgUrl
+        this.setBgImg()
+      })
+    },
     setBgImg(num = 0) {
       this.$refs.homeRef.style.backgroundImage = `url(${this.bgMsg[num].url})`
     },
     getWether() {
       this.$http.get('/home/getwether').then(res => {
-        this.wetherInfo = res.data.forecasts[0]
+        this.weatherInfo = res.data.forecasts[0]
+        console.log(this.weatherInfo)
       })
     }
   },
   components: {
     HomeInput,
     xTime,
-    HomeWether
+    HomeWeather
   }
 }
 </script>
@@ -80,6 +85,7 @@ export default {
         left: 50%;
         top: 40%;
         transform: translate(-50%, -50%);
+        @include columnCenter;
         .home-time {
           font-size: 40px;
           color: #fff;
@@ -87,6 +93,11 @@ export default {
         }
       }
     }
+  }
+  .home-weather {
+    position: absolute;
+    right: 50px;
+    top: 20px;
   }
   .home-bg {
     position: absolute;
