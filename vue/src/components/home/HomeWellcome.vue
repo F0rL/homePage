@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'xTime',
+  name: 'HomeWellcome',
   data() {
     return {
       minute: null,
@@ -57,9 +57,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  p {
-    font-size: 40px;
-  }
   .x-time {
     margin-left: 20px;
   }

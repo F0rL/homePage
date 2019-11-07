@@ -6,7 +6,7 @@
       <div class="home-menu-wrapper" @click="hideWeather"></div>
       <div class="home-main-wrapper" @click="hideWeather">
         <div class="home-center-wrapper">
-          <x-time class="home-time" />
+          <home-wellcome class="home-time" />
           <home-input v-model="searchValue" placeholder="请输入搜索内容" @inputSearch="inputSearch" />
         </div>
       </div>
@@ -18,7 +18,7 @@
 <script>
 import { homeMixin } from '../store/mixin'
 import HomeInput from '../components/home/HomeInput'
-import xTime from '../components/common/xTime'
+import HomeWellcome from '../components/home/HomeWellcome'
 import HomeWeather from '../components/home/HomeWeather'
 
 export default {
@@ -58,7 +58,7 @@ export default {
   },
   components: {
     HomeInput,
-    xTime,
+    HomeWellcome,
     HomeWeather
   }
 }
