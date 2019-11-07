@@ -9,6 +9,7 @@
       @blur="onBlur"
       @input="onInput"
       @change="onChange"
+      @keyup.enter="onEnter"
     />
     <label v-if="placeholder" :class="{'label-focus':inputFocus || value}">{{placeholder}}</label>
     <div class="icon-wrapper" @click="search">
@@ -52,6 +53,9 @@ export default {
     },
     onChange(e) {
       this.$emit('change', e)
+    },
+    onEnter(e) {
+      this.$emit('enter', e)
     }
   },
   components: {

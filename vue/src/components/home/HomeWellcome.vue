@@ -29,7 +29,7 @@ export default {
       this.hour = this.formateTime(moment.getHours())
       if (this.hour >= 6 && this.hour < 12) {
         this.wellCome = '早上好'
-      } else if (this.hour >= 12 && this.hour < 6) {
+      } else if (this.hour >= 12 && this.hour < 18) {
         this.wellCome = '下午好'
       } else {
         this.wellCome = '晚上好'

@@ -7,11 +7,16 @@
       <div class="home-main-wrapper" @click="hideWeather">
         <div class="home-center-wrapper">
           <home-wellcome class="home-time" />
-          <home-input v-model="searchValue" placeholder="请输入搜索内容" @inputSearch="inputSearch" />
+          <home-input
+            v-model.trim="searchValue"
+            placeholder="请输入搜索内容"
+            @inputSearch="inputSearch"
+            @enter="inputSearch"
+          />
         </div>
       </div>
     </div>
-    <home-weather :info="weatherInfo" class="home-weather" v-if="weatherInfo"/>
+    <home-weather :info="weatherInfo" class="home-weather" v-if="weatherInfo" />
   </div>
 </template>
 
@@ -27,17 +32,20 @@ export default {
   data() {
     return {
       bgMsg: null,
-      searchValue: null,
+      searchValue: '',
       weatherInfo: null
     }
   },
   mounted() {
     this.getBgImg()
-    this.getWether()
+    // this.getWether()
   },
   methods: {
     inputSearch() {
-      console.log('搜索', this.searchValue)
+      if (this.searchValue.length === 0) {
+        return
+      }
+      window.open(`https://www.baidu.com/s?wd=${this.searchValue}`)
       this.searchValue = ''
     },
     getBgImg() {
