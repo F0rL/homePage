@@ -1,4 +1,4 @@
-const iconFontUrl = `//at.alicdn.com/t/font_1494383_s8jta473jo8.js`
+const iconFontUrl = `//at.alicdn.com/t/font_1494383_r8oiu8yl4wc.js`
 
 export function setIconFontJs() {
   const node = document.querySelector('head')

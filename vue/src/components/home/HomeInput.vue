@@ -13,7 +13,7 @@
     />
     <label v-if="placeholder" :class="{'label-focus':inputFocus || value}">{{placeholder}}</label>
     <div class="icon-wrapper" @click="search">
-      <x-icon name="right" />
+      <x-icon name="baidu" />
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     disabled: { type: Boolean, default: false }
   },
   methods: {
-    search(){
+    search() {
       this.$emit('inputSearch')
     },
     onFocus(e) {
@@ -104,9 +104,12 @@ export default {
     }
   }
   .icon-wrapper {
-    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
     font-size: 30px;
     @include center;
+    cursor: pointer;
     z-index: 10;
   }
 }
