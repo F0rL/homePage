@@ -56,7 +56,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   .x-time {
     margin-left: 20px;
   }

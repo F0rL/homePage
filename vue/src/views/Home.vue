@@ -32,6 +32,7 @@
         <home-setting-bg />
       </div>
     </transition>
+    <page-info />
   </div>
 </template>
 
@@ -43,6 +44,7 @@ import HomeWeather from '../components/home/HomeWeather'
 import HomeSider from '../components/home/HomeSider'
 import HomeSetting from '../components/home/HomeSetting'
 import HomeSettingBg from '../components/home/HomeSettingBg'
+import PageInfo from '../components/home/PageInfo'
 
 export default {
   name: 'Home',
@@ -78,7 +80,8 @@ export default {
     HomeWeather,
     HomeSider,
     HomeSetting,
-    HomeSettingBg
+    HomeSettingBg,
+    PageInfo
   }
 }
 </script>

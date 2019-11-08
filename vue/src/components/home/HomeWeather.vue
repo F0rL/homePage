@@ -121,11 +121,11 @@ export default {
     letter-spacing: 2px;
     .weather-icon {
       @include center;
-      font-size: 40px;
+      font-size: 50px;
       margin-right: 5px;
     }
     .weather-main {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.2em;
     }
   }
