@@ -1,17 +1,23 @@
 <template>
-  <div class="home-sider-item">
+  <div class="sider-item" @click="routerpush">
     <x-icon name="daohang" class="sider-item-icon"></x-icon>
     <span class="sider-item-msg">主页</span>
   </div>
 </template>
 
 <script>
-import xIcon from '../common/xIcon'
-import { homeMixin } from '@/store/mixin'
+import xIcon from './xIcon'
 
 export default {
-  name: 'HomeSiderItem',
-  mixins: [homeMixin],
+  name: 'SiderItem',
+  props: {
+    data: String
+  },
+  methods: {
+    routerpush() {
+      this.$router.push(`${this.data}`)
+    }
+  },
   components: {
     xIcon
   }
@@ -21,7 +27,7 @@ export default {
 <style scoped lang="scss">
 @import '../../assets/style/global.scss';
 
-.home-sider-item {
+.sider-item {
   width: 100%;
   flex: 1;
   display: flex;
