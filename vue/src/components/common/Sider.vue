@@ -1,6 +1,6 @@
 <template>
   <div class="sider">
-    <div class="user" v-if="!userInfo">
+    <div class="user" @click="toLogin" v-if="!userInfo">
       <p>未登录</p>
     </div>
     <div class="user" v-if="userInfo">
@@ -30,9 +30,12 @@ export default {
         this.$http.post('/token/user', {
           token
         }).then(res => {
-          this.userInfo = res.data.userInfo
+          this.userInfo = res.data.userInfo || null
         })
       }
+    },
+    toLogin() {
+      this.$router.push('/user/login')
     }
   },
   components: {
