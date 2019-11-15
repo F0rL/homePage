@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './assets/style/reset.scss'
+// import './assets/style/global.scss'
 import http from './api/http'
 import { setIconFontJs } from './utils/tool'
 
