@@ -1,6 +1,5 @@
 <template>
   <div class="blog-list-wrapper">
-    <!-- <h1>文章列表</h1> -->
     <x-list v-if="blogList" :data="blogList"/>
     <p v-if="!blogList">没有内容</p>
   </div>
@@ -9,18 +8,16 @@
 <script>
 import xList from '../common/xList'
 export default {
-  name: 'BlogList',
+  name: 'BlogUserList',
   data() {
     return {
       blogList: null
     }
   },
   mounted() {
-    const msg = this.$route.path
-    console.log(msg);
-    this.$http.get('/blog/bloglist').then(res => {
+    this.$http.get('/blog/artical/list').then(res => {
       console.log(res.data)
-      this.blogList = res.data.blogList
+      this.blogList = res.data.userBlogList
     })
   },
   components: {

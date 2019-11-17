@@ -35,3 +35,12 @@ export function numToChinese(num) {
       return 'Error'
   }
 }
+
+// 日期格式化
+export function formatDate(val) {
+  const date = new Date(val)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return `${year}-${month}-${day}`
+}

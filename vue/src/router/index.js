@@ -45,6 +45,22 @@ export default new Router({
           component: () => import ('../components/blog/BlogList.vue')
         },
         {
+          path: 'article/:blogId',
+          name: 'blogView',
+          props: true,
+          component: () => import ('../components/blog/BlogView.vue')
+        },
+        {
+          path: 'userlist',
+          name: 'userList',
+          component: () => import ('../components/blog/BlogUserList.vue')
+        },
+        {
+          path: 'draft',
+          name: 'blogDraft',
+          component: () => import ('../components/blog/BlogDraftList.vue')
+        },
+        {
           path: 'new',
           name: 'blogEditor',
           component: () => import ('../components/blog/BlogEditor.vue')

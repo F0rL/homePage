@@ -9,17 +9,14 @@
 <script>
 import xList from '../common/xList'
 export default {
-  name: 'BlogList',
+  name: 'BlogDraftList',
   data() {
     return {
       blogList: null
     }
   },
   mounted() {
-    const msg = this.$route.path
-    console.log(msg);
-    this.$http.get('/blog/bloglist').then(res => {
-      console.log(res.data)
+    this.$http.get('/blog/drafts/list').then(res => {
       this.blogList = res.data.blogList
     })
   },
