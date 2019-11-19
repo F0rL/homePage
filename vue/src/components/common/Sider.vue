@@ -11,6 +11,7 @@
     <router-link to="/blog/list">所有博客</router-link>
     <router-link to="/blog/userlist">用户列表</router-link>
     <router-link to="/blog/draft">草稿列表</router-link>
+    <a @click="newDrafts">新建文章</a>
   </div>
 </template>
 
@@ -28,6 +29,14 @@ export default {
     this.getUserInfo()
   },
   methods: {
+    newDrafts(){
+      console.log('new')
+      this.$http.post('/blog/drafts/new').then(res => {
+        this.$router.push(`/blog/new/${res.data.msg.id}`)
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     getUserInfo() {
       const token = getToken()
       if (token) {
@@ -61,7 +70,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 5px;
   width: 100%;
 }
 </style>

@@ -49,7 +49,7 @@ export default new Router({
           name: 'blogView',
           props: true,
           component: () => import ('../components/blog/BlogView.vue')
-        },
+        },    
         {
           path: 'userlist',
           name: 'userList',
@@ -61,8 +61,9 @@ export default new Router({
           component: () => import ('../components/blog/BlogDraftList.vue')
         },
         {
-          path: 'new',
-          name: 'blogEditor',
+          path: 'new/:blogId',
+          name: 'blogNew',
+          props: true,
           component: () => import ('../components/blog/BlogEditor.vue')
         }
       ]

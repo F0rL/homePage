@@ -1,8 +1,9 @@
 <template>
   <div class="blog-edit">
     <div class="edit-header">
-      <input class="blog-title" v-model="title" placeholder="请输入标题"/>
+      <input class="blog-title" v-model="title" placeholder="请输入标题" />
       <div class="btn-wrapper">
+        <span>{{updateMsg}}</span>
         <x-icon name="daohang"></x-icon>
         <span @click="publish">发布</span>
       </div>
@@ -18,16 +19,61 @@ import MarkdownEditor from '../common/MarkdownEditor/index'
 import xIcon from '../common/xIcon'
 
 export default {
-  name: 'BlogEditor',
+  name: 'BlogNew',
   data() {
     return {
       title: '',
-      content: ''
+      content: '',
+      timer: null,
+      updateStatus: null
+    }
+  },
+  computed: {
+    updateMsg() {
+      return this.updateStatus ? '正在上传' : '已上传成功'
+    }
+  },
+  props: ['blogId'],
+  watch: {
+    title(val) {
+      this.debounceUpdate()
+    },
+    content(val) {
+      this.debounceUpdate()
     }
   },
   methods: {
     publish() {
-      console.log('发布');
+      this.$http.post('/blog/publish', {
+        title: this.title,
+        content: this.content,
+        blogId: this.blogId
+      }).then(() => {
+        console.log('发布')
+        this.$router.push('/blog/list')
+      })
+    },
+    updateArtical() {
+      console.log(this.title, this.content, this.blogId)
+      this.$http
+        .post('/blog/drafts/update', {
+          title: this.title,
+          content: this.content,
+          blogId: this.blogId
+        })
+        .then(() => {
+          this.updateStatus = false
+        })
+        .catch(() => {
+          this.updateMsg = '网络错误'
+        })
+    },
+    debounceUpdate() {
+      this.updateStatus = true
+      if (this.timer) clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.updateArtical()
+      }, 2000)
     }
   },
   components: {

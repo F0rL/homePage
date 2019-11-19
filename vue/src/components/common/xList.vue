@@ -24,12 +24,20 @@ export default {
     data: {
       type: Array,
       default: []
+    },
+    goto: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
-    toView(id){
-      this.$router.push(`/blog/article/${id}`)
-    }  
+    toView(id) {
+      if (this.goto === 1) {
+        console.log('defa')
+      } else {
+        this.$router.push(`/blog/article/${id}`)
+      }
+    }
   },
   components: {
     MarkdownViewer

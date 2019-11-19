@@ -1,7 +1,7 @@
 <template>
   <div class="blog-list-wrapper">
     <!-- <h1>文章列表</h1> -->
-    <x-list v-if="blogList" :data="blogList"/>
+    <x-list v-if="blogList" :data="blogList" :goto="1" />
     <p v-if="!blogList">没有内容</p>
   </div>
 </template>
