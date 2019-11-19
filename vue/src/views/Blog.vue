@@ -1,9 +1,7 @@
 <template>
   <div class="blog">
     <user-sider class="user-sider-wrapper" />
-    <div class="user-content-wrapper">
-      <router-view class="user-content"/>
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -34,14 +32,6 @@ export default {
     transition: width 0.3s ease;
     &.sider-active {
       width: 100px;
-    }
-  }
-  .user-content-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .user-content {
-      max-width: 914px;
     }
   }
 }

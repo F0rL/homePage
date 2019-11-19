@@ -28,6 +28,9 @@ export default {
       updateStatus: null
     }
   },
+  mounted(){
+    this.getDraft()
+  },
   computed: {
     updateMsg() {
       return this.updateStatus ? '正在上传' : '已上传成功'
@@ -43,6 +46,17 @@ export default {
     }
   },
   methods: {
+    getDraft(){
+      this.$http.get(`/blog/drafts`, {
+        params: {
+          blogId: this.blogId
+        }
+      }).then((res) => {
+        const data = res.data
+        this.title = data.title
+        this.content = data.content
+      })
+    },
     publish() {
       this.$http.post('/blog/publish', {
         title: this.title,
