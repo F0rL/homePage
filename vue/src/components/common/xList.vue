@@ -1,23 +1,43 @@
 <template>
   <ul class="x-list">
-    <li v-for="item in data" :key="item.id" class="blog-list-item" @click="toView(item.id)">
+    <li v-for="item in data" :key="item.id" class="blog-list-item">
       <div class="blog-header">
         <article>{{item.title}}</article>
-        <span>{{item.updated_at | formatDate}}</span>
       </div>
       <!-- <markdown-viewer :value="item.content" /> -->
       <ul class="blog-more">
-        <span>文章</span>
-        <li class="blog-author">
-          <span>{{item.nickname}}</span>
+        <li>
+          <x-icon name="shezhi"></x-icon>
+          <span class="blog-info">发表于： {{item.updated_at | formatDate}}</span>
+        </li>
+        <li>
+          <x-icon name="shezhi"></x-icon>
+          <span class="blog-info">分类： 文章</span>
+        </li>
+        <li>
+          <x-icon name="shezhi"></x-icon>
+          <span class="blog-info">阅读次数： 100</span>
+        </li>
+        <li>
+          <x-icon name="shezhi"></x-icon>
+          <span class="blog-info">标签： JavaScript</span>
+        </li>
+        <li v-if="item.nickname">
+          <x-icon name="shezhi"></x-icon>
+          <span class="blog-info">作者： {{item.nickname}}</span>
         </li>
       </ul>
+      <div class="read-more">
+        <div @click="toView(item.id)">阅读全文</div>
+      </div>
     </li>
   </ul>
 </template>
 
 <script>
 import MarkdownViewer from '../common/MarkdownEditor/MarkdownViewer'
+import xIcon from './xIcon'
+
 export default {
   name: 'XList',
   props: {
@@ -43,7 +63,8 @@ export default {
     }
   },
   components: {
-    MarkdownViewer
+    MarkdownViewer,
+    xIcon
   }
 }
 </script>
@@ -74,63 +95,59 @@ export default {
   .blog-list-item {
     width: 914px;
     flex-grow: 0;
-    border: 1px solid #ccc;
-    padding: 20px;
+    /* padding: 20px; */
     margin-top: 20px;
     transition: all 0.3s linear;
+    border: 1px solid #eee;
     border-radius: 10px;
-    cursor: pointer;
-    &:hover {
-      background-color: rgb(108, 133, 127);
-      box-shadow: 0 15px 30px 0 rgba(83, 216, 216, 0.1);
-    }
+    box-shadow: 0 0 2px 2px #eee; 
     .blog-header {
-      display: flex;
-      align-items: center;
-      position: relative;
-      &::before {
-        display: block;
-        content: '';
-        width: 10%;
-        border-top: 1px solid #ccc;
-      }
-      &::after {
-        display: block;
-        content: '';
-        border-top: 1px solid #ccc;
-        flex: 1;
-      }
+      margin-top: 20px;
+      text-align: center;
       article {
         font-size: 24px;
-        font-weight: 600;
-        margin-left: 20px;
+        font-weight: 400;
+        letter-spacing: 2px;
       }
-      span {
-        margin-left: 20px;
-        font-size: 14px;
-        margin-right: 20px;
-      }
-    }
-    .blog-content {
-      margin-top: 20px;
-      font-size: 18px;
     }
     .blog-more {
       margin-top: 20px;
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       font-size: 14px;
       font-weight: 500;
-      > span {
-        color: rgb(183, 30, 215);
-        &::after {
-          content: '·';
-          color: rgb(178, 186, 194);
-          margin: 0px 0.4em;
-          font-weight: 6000;
+      > li {
+        color: #999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:not(:last-child) {
+          &::after {
+            display: inline-block;
+            content: '|';
+            margin: 0px 0.4em;
+            font-weight: 6000;
+          }
+        }
+        > .blog-info {
+          margin-left: 4px;
         }
       }
-      .blog-author {
-        color: #aaa;
+    }
+    .read-more {
+      div {
+        width: 120px;
+        margin: 20px auto;
+        text-align: center;
+        padding: 6px 8px;
+        border: 1px solid #000;
+        cursor: pointer;
+        border-radius: 5px;
+        &:hover {
+          background-color: #000;
+          color: #fff;
+        }
       }
     }
   }

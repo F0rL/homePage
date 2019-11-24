@@ -23,8 +23,8 @@ export default {
   name: 'Login',
   data() {
     return {
-      account: '',
-      password: ''
+      account: '123@test.com',
+      password: '123'
     }
   },
   methods: {
