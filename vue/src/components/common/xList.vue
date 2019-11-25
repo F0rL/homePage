@@ -28,7 +28,9 @@
         </li>
       </ul>
       <div class="read-more">
-        <div @click="toView(item.id)">阅读全文</div>
+        <div @click="toView(item.id)" v-if="viewType === 0">阅读</div>
+        <div @click="toDraft(item.id)" v-if="viewType !== 0">编辑</div>
+        <div @click="deleteArticle(item.id)" v-if="viewType !== 0">删除</div>
       </div>
     </li>
   </ul>
@@ -45,21 +47,43 @@ export default {
       type: Array,
       default: []
     },
-    goto: {
+    viewType: {
       type: Number,
       default: 0
     }
   },
   methods: {
     toView(id) {
-      if (this.goto === 1) {
-        this.toDraft(id)
+      this.$router.push(`/blog/article/${id}`)
+    },
+    async toDraft(id) {
+      if (this.viewType === 1) {
+        const msg = await this.$http.get('/blog/artical', {
+          params: {
+            blogId: id
+          }
+        })
+        this.$http.post('/blog/drafts/new', {
+          publishId: msg.data.id,
+          content: msg.data.content,
+          title: msg.data.title
+        }).then(res => {
+          this.$router.push(`/blog/new/${res.data.msg.id}`)
+        })
       } else {
-        this.$router.push(`/blog/article/${id}`)
+        this.$router.push(`/blog/new/${id}`)
       }
     },
-    toDraft(id) {
-      this.$router.push(`/blog/new/${id}`)
+    deleteArticle(id) {
+      if (confirm('确认删除？')) {
+        this.$http
+          .post('/blog/delete', {
+            blogId: id
+          })
+          .then(res => {
+            console.log(res)
+          })
+      }
     }
   },
   components: {
@@ -100,7 +124,7 @@ export default {
     transition: all 0.3s linear;
     border: 1px solid #eee;
     border-radius: 10px;
-    box-shadow: 0 0 2px 2px #eee; 
+    box-shadow: 0 0 2px 2px #eee;
     .blog-header {
       margin-top: 20px;
       text-align: center;
@@ -136,16 +160,19 @@ export default {
       }
     }
     .read-more {
+      display: flex;
+      justify-content: center;
       div {
-        width: 120px;
+        font-size: 14px;
         margin: 20px auto;
         text-align: center;
-        padding: 6px 8px;
-        border: 1px solid #000;
+        padding: 6px 22px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 2px 2px #ccc;
         cursor: pointer;
-        border-radius: 5px;
+        border-radius: 8px;
         &:hover {
-          background-color: #000;
+          background-color: #666;
           color: #fff;
         }
       }

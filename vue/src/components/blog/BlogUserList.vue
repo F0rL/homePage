@@ -1,6 +1,6 @@
 <template>
   <div class="blog-list-wrapper">
-    <x-list v-if="blogList" :data="blogList"/>
+    <x-list v-if="blogList" :data="blogList" :viewType="1"/>
     <p v-if="!blogList">没有内容</p>
   </div>
 </template>

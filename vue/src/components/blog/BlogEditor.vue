@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     updateMsg() {
-      return this.updateStatus ? '正在上传' : '已上传成功'
+      return this.updateStatus ? '正在上传' : '上传成功'
     }
   },
   props: ['blogId'],
@@ -62,13 +62,13 @@ export default {
         title: this.title,
         content: this.content,
         blogId: this.blogId
-      }).then(() => {
+      }).then((res) => {
         console.log('发布')
+        console.log(res.data);
         this.$router.push('/blog/list')
       })
     },
     updateArtical() {
-      console.log(this.title, this.content, this.blogId)
       this.$http
         .post('/blog/drafts/update', {
           title: this.title,
