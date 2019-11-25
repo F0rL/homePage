@@ -42,6 +42,7 @@ import xIcon from './xIcon'
 
 export default {
   name: 'XList',
+  inject:['reload'],
   props: {
     data: {
       type: Array,
@@ -81,6 +82,7 @@ export default {
             blogId: id
           })
           .then(res => {
+            this.reload()
             console.log(res)
           })
       }

@@ -38,7 +38,7 @@ export default {
         }
       })
         .then(res => {
-          this.data = res.data.content
+          this.data = res.data
         })
         .catch(err => {
           console.log(err)
