@@ -96,7 +96,7 @@ export default {
     @include fullpage;
     display: flex;
     .home-sider-wrapper {
-      background: rgba(48, 65, 86, 0.6);
+      /* background: rgba(48, 65, 86, 0.6); */
       color: rgb(191, 203, 217);
       backdrop-filter: blur(5px);
       width: 0px;

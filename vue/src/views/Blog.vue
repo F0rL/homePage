@@ -23,16 +23,11 @@ export default {
   height: 100%;
   display: flex;
   .user-sider-wrapper {
+    box-sizing: border-box;
     height: 100%;
-    background: rgba(48, 65, 86, 0.6);
-    color: rgb(191, 203, 217);
-    backdrop-filter: blur(5px);
     width: 100px;
+    flex-shrink: 0;
     overflow: hidden;
-    transition: width 0.3s ease;
-    &.sider-active {
-      width: 100px;
-    }
   }
 }
 </style>

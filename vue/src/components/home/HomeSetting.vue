@@ -33,8 +33,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
-  color: rgb(0, 0, 0, .3);
+  font-size: 24px;
+  color: rgb(250, 255, 255, .6);
   cursor: pointer;
   .sider-setting-wrapper {
     .toggle-sider-icon {
