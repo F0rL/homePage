@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import MarkdownViewer from '../common/MarkdownEditor/MarkdownViewer'
 import xIcon from './xIcon'
 
 export default {
@@ -46,7 +45,9 @@ export default {
   props: {
     data: {
       type: Array,
-      default: []
+      default: function(){
+        return []
+      }
     },
     viewType: {
       type: Number,
@@ -89,7 +90,6 @@ export default {
     }
   },
   components: {
-    MarkdownViewer,
     xIcon
   }
 }

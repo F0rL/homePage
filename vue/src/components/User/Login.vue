@@ -9,6 +9,7 @@
         <span>密码</span>
         <input type="password" v-model="password" placeholder="请输入密码" />
       </div>
+      <x-captcha ref="captcha"></x-captcha>
       <div class="btn">
         <button @click="login">登录</button>
         <span @click="toRegister">>>>转到注册</span>
@@ -19,6 +20,7 @@
 
 <script>
 import { saveToken } from '../../utils/localStorage'
+import xCaptcha from '../common/xCaptcha'
 export default {
   name: 'Login',
   data() {
@@ -29,19 +31,27 @@ export default {
   },
   methods: {
     login() {
-      this.$http
-        .post('/user/login', {
-          account: this.account,
-          password: this.password,
+      this.$refs.captcha
+        .verify()
+        .then(() => {
+          this.$http
+            .post('/user/login', {
+              account: this.account,
+              password: this.password
+            })
+            .then(res => {
+              saveToken(res.data.token)
+              this.$router.push('/blog/list')
+            })
         })
-        .then(res => {
-          saveToken(res.data.token)
-          this.$router.push('/blog/list')
-        })
+        .catch(err => console.log(err))
     },
     toRegister() {
       this.$router.push('/user/register')
     }
+  },
+  components: {
+    xCaptcha
   }
 }
 </script>
@@ -52,28 +62,32 @@ export default {
   width: 100%;
   height: 100%;
   @include center;
-  background-color: #ccc;
   .user {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 40px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #ddd;
     .account,
     .password {
+      width: 300px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
       span {
-        margin-right: 10px;
+        margin-right: 20px;
         font-size: 14px;
       }
       input {
+        flex: 1;
         outline: none;
         border: none;
-        height: 50px;
-        font-size: 16px;
+        height: 30px;
+        padding: 10px 0;
+        font-size: 14px;
+        line-height: 1.2em;
         border-bottom: 1px solid #ccc;
         &:focus {
           border-bottom: 1px solid #000;
@@ -82,7 +96,8 @@ export default {
     }
     .btn {
       font-size: 14px;
-      text-align: right;
+      text-align: left;
+      margin-top: 20px;
       button {
         border: none;
         font-size: 14px;

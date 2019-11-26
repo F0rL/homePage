@@ -17,6 +17,7 @@
         <span>确认密码</span>
         <input type="password" placeholder="请重复输入密码" v-model="rePassword" />
       </div>
+      <x-captcha ref="captcha"></x-captcha>
       <div class="btn">
         <button @click="register">注册</button>
         <span @click="toLogin">>>>转到登录</span>
@@ -26,6 +27,8 @@
 </template>
 
 <script>
+import xCaptcha from '../common/xCaptcha'
+import { saveToken } from '../../utils/localStorage'
 export default {
   name: 'Register',
   data() {
@@ -38,7 +41,7 @@ export default {
   },
   computed: {
     passwordNotSame() {
-      return password === rePassword
+      return this.password === this.rePassword
     }
   },
   methods: {
@@ -46,16 +49,29 @@ export default {
       this.$router.push('/user/login')
     },
     register() {
-      this.$http
-        .post('/user/register', {
-          email: this.account,
-          password: this.password,
-          nickname: this.nickname
+      this.$refs.captcha
+        .verify()
+        .then(() => {
+          this.$http
+            .post('/user/register', {
+              email: this.account,
+              password: this.password,
+              nickname: this.nickname
+            })
+            .then(res => {
+              if (res.data.code === 404) {
+                alert(res.data.msg)
+                return
+              }
+              saveToken(res.data.token)
+              this.$router.push('/blog/list')
+            })
         })
-        .then(res => {
-          this.$router.push('/blog/list')
-        })
+        .catch(err => console.log(err))
     }
+  },
+  components: {
+    xCaptcha
   }
 }
 </script>
@@ -67,15 +83,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ccc;
   .user {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 40px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #ddd;
     .account,
     .password {
+      width: 340px;
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -92,10 +109,12 @@ export default {
         }
       }
       span {
+        width: 60px;
         margin-right: 10px;
         font-size: 14px;
       }
       input {
+        flex: 1;
         outline: none;
         border: none;
         height: 30px;
@@ -107,8 +126,9 @@ export default {
       }
     }
     .btn {
+      margin-top: 20px;
       font-size: 14px;
-      text-align: right;
+      text-align: left;
       button {
         border: none;
         font-size: 14px;

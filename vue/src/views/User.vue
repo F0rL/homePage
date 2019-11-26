@@ -20,6 +20,7 @@ export default {
 .user {
   height: 100%;
   display: flex;
+  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
   .user-sider-wrapper {
     box-sizing: border-box;
     height: 100%;

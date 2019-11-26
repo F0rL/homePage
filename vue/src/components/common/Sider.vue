@@ -20,7 +20,6 @@
 
 <script>
 import { getToken, clearToken } from '../../utils/localStorage'
-import SiderItem from './SiderItem'
 export default {
   name: 'Sider',
   data() {
@@ -63,9 +62,6 @@ export default {
       clearToken()
     }
   },
-  components: {
-    SiderItem
-  }
 }
 </script>
 

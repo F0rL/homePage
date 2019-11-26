@@ -38,10 +38,10 @@ export default {
   },
   props: ['blogId'],
   watch: {
-    title(val) {
+    title() {
       this.debounceUpdate()
     },
-    content(val) {
+    content() {
       this.debounceUpdate()
     }
   },
