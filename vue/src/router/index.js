@@ -8,7 +8,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/blog'
+      redirect: '/home'
     },
     {
       path: '/home',

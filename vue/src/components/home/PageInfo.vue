@@ -1,6 +1,6 @@
 <template>
   <div class="page-info-wrapper">
-    <p>© 2019 www.forl.fun</p>
+    <p>© 2019 鄂ICP备18028658号</p>
     <p class="github-info">
       <x-icon name="github" />
       <a href="https://github.com/F0rL" class="github-link">github.com/F0rl</a>

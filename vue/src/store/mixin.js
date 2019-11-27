@@ -33,6 +33,7 @@ export const homeMixin = {
       const bgCache = getBgInfoCache()
       if (!bgCache) {
         this.$http.get('/home/bg').then(res => {
+          console.log(res)
           saveBgInfoCache(res.data, 60 * 60 * 24)
           this.setBgInfo(res.data)
           this.getCurrentBg()

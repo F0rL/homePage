@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import 'codemirror/lib/codemirror.css' // codemirror
-import 'tui-editor/dist/tui-editor.css' // editor ui
 import 'tui-editor/dist/tui-editor-contents.css' // editor content
 
 import Editor from 'tui-editor'
@@ -20,9 +18,9 @@ export default {
       required: false,
       default() {
         return (
-          'markdown-editor-' +
-          +new Date() +
-          ((Math.random() * 1000).toFixed(0) + '')
+          'markdown-editor'// +
+          // +new Date() +
+          // ((Math.random() * 1000).toFixed(0) + '')
         )
       }
     }
